@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "tweetrainer"
+    "name": "sentimentator"
   },
   "apps": [
     {
@@ -19,9 +19,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/normalize.css/normalize.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/hammerjs/hammer.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

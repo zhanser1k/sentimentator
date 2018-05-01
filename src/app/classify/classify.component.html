@@ -1,0 +1,17 @@
+<div class="sentence-input">
+  
+  <div class="affleck">
+    <img class="loading" [ngClass]="{'loading': loader}" *ngIf="!loader && !requested" src="../../assets/images/ben_affleck.jpg" alt="">
+    <img *ngIf="isPositive && requested" src="../../assets/images/affleck_positive.jpeg" alt="">
+    <img *ngIf="!isPositive && requested" src="../../assets/images/affleck_negative.jpeg" alt="">
+    <img *ngIf="loader" src="../../assets/images/affleck_loading.jpeg" alt="">
+    <div *ngIf="requested" class="sentiment" [ngClass]="{'success': isPositive, 'negative': !isPositive}">{{isPositive? 'Positive!' : 'Negative!'}}</div>
+  </div>
+  <h2>Не будь как Бен Аффлек. Умей выражать эмоции!</h2>
+ 
+  <mat-form-field>
+    <textarea matInput placeholder="Enter sentence" #sentence matTextareaAutosize matAutosizeMinRows="2"
+              matAutosizeMaxRows="5" (keyup)="onKey($event)"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="classify(sentence.value)">Let's go</button>
+</div>

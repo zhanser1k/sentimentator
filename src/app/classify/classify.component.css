@@ -1,0 +1,20 @@
+.sentence-input {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.affleck {
+    margin: 0 auto;
+}
+
+.affleck img {
+    height: 280px;
+}
+
+.success {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
