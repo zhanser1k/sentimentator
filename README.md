@@ -1,4 +1,5 @@
 # Sentimentator
+<img src="src/assets/images/affleck_loading.jpeg" height="280">
 
 ## Install requirements
 
