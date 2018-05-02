@@ -15,7 +15,7 @@ export class ClassifyComponent implements OnInit {
 
   classify(text) {
     this.loader = true;
-    this._http.post<any>("/api/classify", {text: text})
+    this._http.post<any>("/api/classify", {text: text.toLowerCase()})
     .subscribe(res => {
       this.requested = true;
       this.loader = false;

@@ -2,10 +2,11 @@
   
   <div class="affleck">
     <img class="loading" [ngClass]="{'loading': loader}" *ngIf="!loader && !requested" src="../../assets/images/ben_affleck.jpg" alt="">
-    <img *ngIf="isPositive && requested" src="../../assets/images/affleck_positive.jpeg" alt="">
-    <img *ngIf="!isPositive && requested" src="../../assets/images/affleck_negative.jpeg" alt="">
-    <img *ngIf="loader" src="../../assets/images/affleck_loading.jpeg" alt="">
+    <img [ngClass]="isPositive && requested ? 'show' : 'hide'" src="../../assets/images/affleck_positive.jpeg" alt="">
+    <img [ngClass]="!isPositive && requested ? 'show' : 'hide'" src="../../assets/images/affleck_negative.jpeg" alt="">
+    <img [ngClass]="loader ? 'show' : 'hide'" src="../../assets/images/affleck_loading.jpeg" alt="">
     <div *ngIf="requested" class="sentiment" [ngClass]="{'success': isPositive, 'negative': !isPositive}">{{isPositive? 'Positive!' : 'Negative!'}}</div>
+    <div *ngIf="loader">Processing...</div>
   </div>
   <h2>Не будь как Бен Аффлек. Умей выражать эмоции!</h2>
  
@@ -13,5 +14,5 @@
     <textarea matInput placeholder="Enter sentence" #sentence matTextareaAutosize matAutosizeMinRows="2"
               matAutosizeMaxRows="5" (keyup)="onKey($event)"></textarea>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="classify(sentence.value)">Let's go</button>
+  <button *ngIf="!loader" mat-raised-button color="primary" (click)="classify(sentence.value)">Let's go</button>
 </div>

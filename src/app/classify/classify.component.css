@@ -9,6 +9,7 @@
 
 .affleck img {
     height: 280px;
+    margin: 0 auto;
 }
 
 .success {
@@ -17,4 +18,12 @@
 
 .negative {
     color: red;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
 }
