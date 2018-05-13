@@ -8,3 +8,32 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+.inline-loader {
+    display: block;
+    margin: 0 auto;
+}
+
+.alert {
+    opacity: .7;
+    width: 100%;
+    height: auto;
+    padding: 10px 5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.alert.alert-danger {
+    background: #FFCDD2;
+    color: #ff1100;
+    border: 1px solid #D32F2F;
+    border-radius: 5px;
+}
+
+h1.title {
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+}

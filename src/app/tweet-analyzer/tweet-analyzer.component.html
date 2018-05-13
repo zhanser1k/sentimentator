@@ -1,0 +1,42 @@
+<div class="container">
+    <form novalidate *ngIf="!loading && !result" class="analyze-form" name="form" #f="ngForm" (ngSubmit)="f.form.valid && analyze()">
+        <mat-form-field class="full-width">
+          <input (keyup)="onKey($event)" [disabled]="loading" autocomplete="off" matInput placeholder="Слово, название продукта, имя или что угодно..." name="searchText" [(ngModel)]="model.searchText" #searchText="ngModel" required>
+          <mat-error *ngIf="f.submitted && !searchText.valid">
+            Поле не может быть пустым
+          </mat-error>
+        </mat-form-field>
+        <div class="control-wrapper">
+            <mat-form-field class="count-select">
+                <mat-select placeholder="Количество сообщений" [(ngModel)]="model.count" name="count">
+                    <mat-option *ngFor="let count of countOptions" [value]="count">
+                        {{count}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+             <button class="analyze-action-btn" [disabled]="loading" color="primary" mat-raised-button>Поехали!</button>
+        </div>
+      </form>
+      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+      <mat-progress-spinner [diameter]="60" class="inline-loader" *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+      <div class="info" *ngIf="result && requested">
+          <p class="info-count">Из {{result.info.count}} сообщений:</p>
+          <div class="sentiment positive-percent" countUp duration="2" [endVal]="result.info.positiveTweetsPercent">0</div>
+          <div class="sentiment negative-percent" countUp duration="2" [endVal]="result.info.negativeTweetsPercent">0</div>
+          <div class="action-btn-container">
+              <button class="reset__button"
+                (click)="reset()"
+                mat-raised-button>Вернуться назад</button>
+              <button class="info-more__button" 
+              (click)="toggleExtendedInfo()" 
+              color="primary" 
+              mat-raised-button>{{showExtended ? 'Скрыть сообщения' : 'Показать сообщения'}}</button>
+          </div>
+      </div>
+      <div class="extended-info" *ngIf="showExtended">
+          <mat-card class="extended-info__card" *ngFor="let tweet of result.tweets">
+            <p>{{tweet.text}}</p>
+            <div [ngClass]="tweet.sentiment ? 'positive' : 'negative'" class="polarity">{{tweet.sentiment ? 'Положительный' : 'Отрицательный'}}</div>
+          </mat-card>
+      </div>
+</div>

@@ -10,6 +10,7 @@ import config
 from text_cnn import TextCNN
 from tensorflow.contrib import learn
 
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 # Load data
 print("Loading data...")
 x_text, y = data_helpers.load_data_and_labels(config.positive_data_file, config.negative_data_file)

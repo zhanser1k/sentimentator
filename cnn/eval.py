@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-
+# -*- coding: utf-8 -*-
 import tensorflow as tf
 import numpy as np
 import os
@@ -11,8 +11,9 @@ from tensorflow.contrib import learn
 import csv
 import argparse
 import config
+import json
 
-
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 # Argument parser
 parser = argparse.ArgumentParser(description='Load parameters')
 parser.add_argument('--sentence','-s', metavar='text', type=str, default='',
@@ -21,7 +22,7 @@ parser.add_argument('--checkpoint_dir', '-cd', metavar='checkpoint directory', t
                     default=config.checkpoint_dir, help='checkpoint_dir for restore model')
 
 options = vars(parser.parse_args())
-x_raw = [options['sentence'] ]
+x_raw = options['sentence'].split('|')
 y_test = [1]
 
 # Map data into vocabulary
@@ -54,11 +55,18 @@ with graph.as_default():
         # Generate batches for one epoch
         batches = data_helpers.batch_iter(list(x_test), config.batch_size, 1, shuffle=False)
 
+        # Collect the predictions here
+        all_predictions = []
+
         for x_test_batch in batches:
             batch_predictions = sess.run(predictions, {input_x: x_test_batch, dropout_keep_prob: 1.0})
+            all_predictions = np.concatenate([all_predictions, batch_predictions])
 # Print accuracy if y_test is defined
 
-if (batch_predictions == 0.0):
-    print("negative")
-else:
-    print("positive")
+predictions_human_readable = np.column_stack((np.array(x_raw), all_predictions))
+predicts = batch_predictions.tolist()
+arr = []
+for index, raw in enumerate(x_raw):
+    arr.append({"text": raw, "sentiment": predicts[index]})
+result = json.dumps(arr, ensure_ascii=True)
+print(result)

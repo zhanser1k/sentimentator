@@ -6,6 +6,6 @@ numpy==1.14.2
 protobuf==3.5.2.post1
 pylint==1.8.4
 six==1.11.0
-tensorflow==0.12.1
+tensorflow==1.2.0
 utils==0.9.0
 wrapt==1.10.11
