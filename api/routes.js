@@ -19,7 +19,7 @@ function classifyTweets(text, callback) {
   };
   PythonShell.run('eval.py', options, (err, results) => {
     if (err) throw err;
-    callback(results[0]);
+    callback(results[results.length - 1]);
   });
 }
 
@@ -131,7 +131,7 @@ router.post('/tweets',checkAuth, (req, res, next) => {
     .then((result) => {
       let tweetsToAnalyze = [];
       result.data.statuses.forEach((tweet) => {
-          tweetsToAnalyze.push(tweet.full_text);
+          tweetsToAnalyze.push(tweet.full_text.replace(/[^A-Za-zА-Яа-яЁё\s]/g, ""));
       });
       classifyTweets(tweetsToAnalyze.join('|'), (results) => {
         results = JSON.parse(results);
