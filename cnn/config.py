@@ -5,9 +5,9 @@ dev_sample_percentage = .1 #Percentage of the training data to use for validatio
 checkpoint_dir = "/home/cloud/sentimentator/cnn/runs/models/checkpoints/" # Checkponts directory
 # Model HyperParams
 eval_train = False # Evaluate on whole dataset
-embedding_dim = 32 # Dimensionality of character embedding
+embedding_dim = 128 # Dimensionality of character embedding
 filter_sizes = "3,4,5" #Comma-separated filter sizes
-num_filters = 32 # Number of filters per filter size
+num_filters = 128 # Number of filters per filter size
 dropout_keep_prob = 0.5 # Dropout keep probability
 l2_reg_lambda = 0 # L2 reguralization lambda
 # Training params
